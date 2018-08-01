@@ -1,25 +1,29 @@
 import { SearchPage } from '../pages/searchPage';
-import { GlobalActivities } from '../pages/GlobalActivities';
+import { GlobalActivities } from '../pages/globalActivities';
+import { async } from '../node_modules/@types/q';
 
 let searchPage = new SearchPage();
 let globalActivities = new GlobalActivities();
 
 describe('Execute a search on Google', function () {
 
-    beforeAll(function () {
+    beforeAll( () => {
         globalActivities.enterThePage("https://www.google.com.co/");
     });
 
-    it('Search on Google', function () {
+    it('Search on Google', async() => {
         searchPage.setSearchParameter("gmail");
-        searchPage.pressSearchGoogleButton();
-        searchPage.verifySearchResult("Gmail - Google", "https://www.google.com/gmail/");
+        searchPage.touchSearchGoogleButton();
+        expect(await searchPage.getResultTittle()).toEqual('Gmail - Google');
+		expect(await searchPage.getResultNameDescription()).toEqual("https://www.google.com/gmail/");
     });
 
-    it('Navigate to page researched', function () {
-        searchPage.setSearchParameter("gmail");
-        searchPage.pressSearchGoogleButton();
+    it('Navigate to page researched', async() => {
         searchPage.enterTheResult("Gmail - Google");
-        searchPage.verifyEntryToThePage("Gmail");
+        expect(await globalActivities.getTitlePage()).toEqual("Gmail");
+    });
+
+    afterAll( () => {
+        globalActivities.closeBrowser();
     });
 });
