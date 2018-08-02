@@ -2,21 +2,17 @@ import {browser, ExpectedConditions, ElementFinder} from 'protractor';
 
 export class GlobalActivities {
     
-    public closeBrowser(): any {
-        browser.quit();
-    }
-    
     public async getTitlePage(): Promise<string> {
         return await browser.getTitle();
     }
 
-    public enterThePage(url: string) {
+    public async enterThePage(url: string) {
         browser.ignoreSynchronization = true;
-		browser.get(url);
+		await browser.get(url);
     }
 
-    public waitForElement(parameter: ElementFinder, seconds: number) {
-        browser.wait(ExpectedConditions.elementToBeClickable(parameter), seconds * 1000, 'Failed the explicit wait');
+    public async waitForElement(parameter: ElementFinder, seconds: number) {
+        await browser.wait(ExpectedConditions.elementToBeClickable(parameter), seconds * 1000, 'Failed the explicit wait');
     }
 
 }

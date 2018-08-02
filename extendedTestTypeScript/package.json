@@ -17,6 +17,7 @@
   "dependencies": {},
   "devDependencies": {
     "@types/jasmine": "^2.8.8",
+    "@types/node": "^10.5.5",
     "protractor": "^5.4.0"
   }
 }

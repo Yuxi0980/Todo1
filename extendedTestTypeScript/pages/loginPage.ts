@@ -5,36 +5,24 @@ let globalActivities = new GlobalActivities();
 
 export class LoginPage {
     
-    usernameTextInput: ElementFinder = element(by.name("user"));
+    usernameTextInput: ElementFinder = element(by.name('user'));
     passwordTextInput: ElementFinder = element(by.name('password'));
-    loginButton: ElementFinder = element(by.css("body > center > div > form > table > tbody > tr:nth-child(3) > td:nth-child(2) > input"));
-    messageError: ElementFinder = element(by.id("errorMessage"));
+    loginButton: ElementFinder = element(by.css('input[onclick="login()"]'));
+    messageError: ElementFinder = element(by.id('errorMessage'));
 
-    public setUsername(value: string) {
-		this.usernameTextInput.sendKeys(value);
-    }
-    
-    public setPassword(value: string) {
-		this.passwordTextInput.sendKeys(value);
+    public async sendFormLogin(username: string, password: string) {
+        await this.usernameTextInput.sendKeys(username);
+        await this.usernameTextInput.sendKeys(password);
+        await this.loginButton.click();
     }
 
-    public sendFormLogin() {
-        this.loginButton.click();
-    }
-
-    public clearFormLogin() {
-        this.usernameTextInput.clear();
-        this.passwordTextInput.clear();
+    public async clearFormLogin() {
+        await this.usernameTextInput.clear();
+        await this.passwordTextInput.clear();
     }
 
     public async getMessageError(): Promise<string> {
         return await this.messageError.getText();
-    }
-
-    public rightLogin() {
-        this.setUsername("test");
-        this.setPassword("secret");
-        this.sendFormLogin();
     }
 
 }

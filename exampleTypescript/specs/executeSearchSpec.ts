@@ -7,23 +7,20 @@ let globalActivities = new GlobalActivities();
 
 describe('Execute a search on Google', function () {
 
-    beforeAll( () => {
-        globalActivities.enterThePage("https://www.google.com.co/");
+    beforeAll( async() => {
+        await globalActivities.enterThePage("https://www.google.com.co/");
     });
 
     it('Search on Google', async() => {
-        searchPage.setSearchParameter("gmail");
-        searchPage.touchSearchGoogleButton();
+        await searchPage.setSearchParameter("gmail");
+        await searchPage.touchSearchGoogleButton();
         expect(await searchPage.getResultTittle()).toEqual('Gmail - Google');
 		expect(await searchPage.getResultNameDescription()).toEqual("https://www.google.com/gmail/");
     });
 
     it('Navigate to page researched', async() => {
-        searchPage.enterTheResult("Gmail - Google");
+        await searchPage.enterTheResult("Gmail - Google");
         expect(await globalActivities.getTitlePage()).toEqual("Gmail");
     });
 
-    afterAll( () => {
-        globalActivities.closeBrowser();
-    });
 });

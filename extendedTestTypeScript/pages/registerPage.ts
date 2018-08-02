@@ -4,8 +4,8 @@ import { GlobalActivities } from '../pages/GlobalActivities';
 let globalActivities = new GlobalActivities();
 
 export class RegisterPage {
-    
-    usernameTextInput: ElementFinder = element(by.name("username"));
+
+    usernameTextInput: ElementFinder = element(by.name('username'));
     passwordTextInput: ElementFinder = element(by.name('password'));
     password2TextInput: ElementFinder = element(by.name('password2'));
     maleRadioButton: ElementFinder = element(by.css('body > center > div > form > div > table > tbody > tr:nth-child(4) > td:nth-child(2) > input[type="radio"]:nth-child(1)'));
@@ -14,46 +14,37 @@ export class RegisterPage {
     billingAddressTextInput: ElementFinder = element(by.name('billaddress'));
     stateSelectInput: ElementFinder = $('[name="state"]');
     termsAndConditionsCheckBox: ElementFinder = element(by.name('agree'));
-    registerButton: ElementFinder = element(by.css("body > center > div > form > input[type='button']:nth-child(5)"));
+    registerButton: ElementFinder = element(by.css('body > center > div > form > input[type="button"]:nth-child(5)'));
 
-    public setUsername(value: string) {
-		this.usernameTextInput.sendKeys(value);
-    }
-    
-    public setPassword(value: string) {
-		this.passwordTextInput.sendKeys(value);
+    public async sendFormRegister(username: string, password: string, password2: string, gender: string, address: string, billingAddress: string, state: string, TermsAndCondition: boolean) {
+        await this.usernameTextInput.sendKeys(username);
+        await this.passwordTextInput.sendKeys(password);
+        await this.password2TextInput.sendKeys(password2);
+        await this.chooseGender(gender);
+        await this.addressTextInput.sendKeys(address);
+        await this.billingAddressTextInput.sendKeys(billingAddress);
+        await this.stateSelectInput.element(by.cssContainingText('option', state)).click();
+        await this.markTermsAndCondition(TermsAndCondition);
+        await this.registerButton.click();
     }
 
-    public setPassword2(value: string) {
-        this.password2TextInput.sendKeys(value);
-    }
-
-    public chooseGender(value: string) {
-        if (value == "male") {
-            this.maleRadioButton.click();
-        } else {
-            this.femaleRadioButton.click();
+    public async chooseGender(gender: string) {
+        switch (gender) {
+            case 'male':
+                await this.maleRadioButton.click();
+                break;
+            case 'female':
+                await this.femaleRadioButton.click();
+                break;
+            default: 
+                break;
         }
     }
 
-    public setAddress(value: string) {
-        this.addressTextInput.sendKeys(value);
-    }
-
-    public setBillingAddress(value: string) {
-        this.billingAddressTextInput.sendKeys(value);
-    }
-
-    public selectState(value: string) {
-        this.stateSelectInput.element(by.cssContainingText('option', value)).click();
-    }
-
-    public markTermsAndCondition() {
-        this.termsAndConditionsCheckBox.click();
-    }
-
-    public sendFormRegister() {
-        this.registerButton.click();
+    public async markTermsAndCondition(TermsAndCondition: boolean) {
+        if (TermsAndCondition == true) {
+            await this.termsAndConditionsCheckBox.click();
+        }
     }
 
     public async getMessageAlert(): Promise<string> {

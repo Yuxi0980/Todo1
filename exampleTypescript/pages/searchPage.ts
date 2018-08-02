@@ -12,16 +12,16 @@ export class SearchPage {
 	resultNameDescription: ElementFinder = element(by.css("#rso > div:nth-child(1) > div > div > div > div > div > div > div.f.hJND5c.TbwUpd > cite"));
 	elementOfThePageResult: ElementFinder = element(by.css("#hdtb-msb-vis > div.hdtb-mitem.hdtb-msel.hdtb-imb"));
 
-	public setSearchParameter(value: string) {
-		globalActivities.waitForElement(this.searchInput, 10);
-		this.searchInput.sendKeys(value);
-		this.searchInput.sendKeys(protractor.Key.TAB);
+	public async setSearchParameter(value: string) {
+		await globalActivities.waitForElement(this.searchInput, 10);
+		await this.searchInput.sendKeys(value);
+		await this.searchInput.sendKeys(protractor.Key.TAB);
 	}
 
-	public touchSearchGoogleButton() {
-		globalActivities.waitForElement(this.searchGoogleButton, 5);
-		this.searchGoogleButton.click();
-		globalActivities.waitForElement(this.elementOfThePageResult, 5);
+	public async touchSearchGoogleButton() {
+		await globalActivities.waitForElement(this.searchGoogleButton, 5);
+		await this.searchGoogleButton.click();
+		await globalActivities.waitForElement(this.elementOfThePageResult, 5);
 	}
 
 	public async getResultTittle() : Promise<string> {
@@ -32,8 +32,8 @@ export class SearchPage {
 		return await this.resultNameDescription.getText();
 	}
 
-	public enterTheResult(parameter: string) {
-		element(by.linkText(parameter)).click();
+	public async enterTheResult(parameter: string) {
+		await element(by.linkText(parameter)).click();
 	}
 
 }

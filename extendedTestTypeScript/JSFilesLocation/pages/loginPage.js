@@ -13,34 +13,29 @@ const GlobalActivities_1 = require("../pages/GlobalActivities");
 let globalActivities = new GlobalActivities_1.GlobalActivities();
 class LoginPage {
     constructor() {
-        this.usernameTextInput = protractor_1.element(protractor_1.by.name("user"));
+        this.usernameTextInput = protractor_1.element(protractor_1.by.name('user'));
         this.passwordTextInput = protractor_1.element(protractor_1.by.name('password'));
-        this.loginButton = protractor_1.element(protractor_1.by.css("body > center > div > form > table > tbody > tr:nth-child(3) > td:nth-child(2) > input"));
-        this.messageError = protractor_1.element(protractor_1.by.id("errorMessage"));
+        this.loginButton = protractor_1.element(protractor_1.by.css('input[onclick="login()"]'));
+        this.messageError = protractor_1.element(protractor_1.by.id('errorMessage'));
     }
-    setUsername(value) {
-        this.usernameTextInput.sendKeys(value);
-    }
-    setPassword(value) {
-        this.passwordTextInput.sendKeys(value);
-    }
-    sendFormLogin() {
-        this.loginButton.click();
+    sendFormLogin(username, password) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.usernameTextInput.sendKeys(username);
+            yield this.usernameTextInput.sendKeys(password);
+            yield this.loginButton.click();
+        });
     }
     clearFormLogin() {
-        this.usernameTextInput.clear();
-        this.passwordTextInput.clear();
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.usernameTextInput.clear();
+            yield this.passwordTextInput.clear();
+        });
     }
     getMessageError() {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.messageError.getText();
         });
     }
-    rightLogin() {
-        this.setUsername("test");
-        this.setPassword("secret");
-        this.sendFormLogin();
-    }
 }
 exports.LoginPage = LoginPage;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibG9naW5QYWdlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vcGFnZXMvbG9naW5QYWdlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7QUFBQSwyQ0FBd0Q7QUFDeEQsZ0VBQTZEO0FBRTdELElBQUksZ0JBQWdCLEdBQUcsSUFBSSxtQ0FBZ0IsRUFBRSxDQUFDO0FBRTlDLE1BQWEsU0FBUztJQUF0QjtRQUVJLHNCQUFpQixHQUFrQixvQkFBTyxDQUFDLGVBQUUsQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQztRQUM1RCxzQkFBaUIsR0FBa0Isb0JBQU8sQ0FBQyxlQUFFLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDLENBQUM7UUFDaEUsZ0JBQVcsR0FBa0Isb0JBQU8sQ0FBQyxlQUFFLENBQUMsR0FBRyxDQUFDLHdGQUF3RixDQUFDLENBQUMsQ0FBQztRQUN2SSxpQkFBWSxHQUFrQixvQkFBTyxDQUFDLGVBQUUsQ0FBQyxFQUFFLENBQUMsY0FBYyxDQUFDLENBQUMsQ0FBQztJQTZCakUsQ0FBQztJQTNCVSxXQUFXLENBQUMsS0FBYTtRQUNsQyxJQUFJLENBQUMsaUJBQWlCLENBQUMsUUFBUSxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBQ3JDLENBQUM7SUFFTSxXQUFXLENBQUMsS0FBYTtRQUNsQyxJQUFJLENBQUMsaUJBQWlCLENBQUMsUUFBUSxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBQ3JDLENBQUM7SUFFTSxhQUFhO1FBQ2hCLElBQUksQ0FBQyxXQUFXLENBQUMsS0FBSyxFQUFFLENBQUM7SUFDN0IsQ0FBQztJQUVNLGNBQWM7UUFDakIsSUFBSSxDQUFDLGlCQUFpQixDQUFDLEtBQUssRUFBRSxDQUFDO1FBQy9CLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxLQUFLLEVBQUUsQ0FBQztJQUNuQyxDQUFDO0lBRVksZUFBZTs7WUFDeEIsT0FBTyxNQUFNLElBQUksQ0FBQyxZQUFZLENBQUMsT0FBTyxFQUFFLENBQUM7UUFDN0MsQ0FBQztLQUFBO0lBRU0sVUFBVTtRQUNiLElBQUksQ0FBQyxXQUFXLENBQUMsTUFBTSxDQUFDLENBQUM7UUFDekIsSUFBSSxDQUFDLFdBQVcsQ0FBQyxRQUFRLENBQUMsQ0FBQztRQUMzQixJQUFJLENBQUMsYUFBYSxFQUFFLENBQUM7SUFDekIsQ0FBQztDQUVKO0FBbENELDhCQWtDQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibG9naW5QYWdlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vcGFnZXMvbG9naW5QYWdlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7QUFBQSwyQ0FBd0Q7QUFDeEQsZ0VBQTZEO0FBRTdELElBQUksZ0JBQWdCLEdBQUcsSUFBSSxtQ0FBZ0IsRUFBRSxDQUFDO0FBRTlDLE1BQWEsU0FBUztJQUF0QjtRQUVJLHNCQUFpQixHQUFrQixvQkFBTyxDQUFDLGVBQUUsQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQztRQUM1RCxzQkFBaUIsR0FBa0Isb0JBQU8sQ0FBQyxlQUFFLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDLENBQUM7UUFDaEUsZ0JBQVcsR0FBa0Isb0JBQU8sQ0FBQyxlQUFFLENBQUMsR0FBRyxDQUFDLDBCQUEwQixDQUFDLENBQUMsQ0FBQztRQUN6RSxpQkFBWSxHQUFrQixvQkFBTyxDQUFDLGVBQUUsQ0FBQyxFQUFFLENBQUMsY0FBYyxDQUFDLENBQUMsQ0FBQztJQWlCakUsQ0FBQztJQWZnQixhQUFhLENBQUMsUUFBZ0IsRUFBRSxRQUFnQjs7WUFDekQsTUFBTSxJQUFJLENBQUMsaUJBQWlCLENBQUMsUUFBUSxDQUFDLFFBQVEsQ0FBQyxDQUFDO1lBQ2hELE1BQU0sSUFBSSxDQUFDLGlCQUFpQixDQUFDLFFBQVEsQ0FBQyxRQUFRLENBQUMsQ0FBQztZQUNoRCxNQUFNLElBQUksQ0FBQyxXQUFXLENBQUMsS0FBSyxFQUFFLENBQUM7UUFDbkMsQ0FBQztLQUFBO0lBRVksY0FBYzs7WUFDdkIsTUFBTSxJQUFJLENBQUMsaUJBQWlCLENBQUMsS0FBSyxFQUFFLENBQUM7WUFDckMsTUFBTSxJQUFJLENBQUMsaUJBQWlCLENBQUMsS0FBSyxFQUFFLENBQUM7UUFDekMsQ0FBQztLQUFBO0lBRVksZUFBZTs7WUFDeEIsT0FBTyxNQUFNLElBQUksQ0FBQyxZQUFZLENBQUMsT0FBTyxFQUFFLENBQUM7UUFDN0MsQ0FBQztLQUFBO0NBRUo7QUF0QkQsOEJBc0JDIn0=

@@ -1,5 +1,9 @@
 import { GlobalActivities } from '../pages/globalActivities';
 import { RegisterPage } from '../pages/registerPage';
+import * as fs from 'fs';
+
+const links = JSON.parse(fs.readFileSync('../data/links.json','utf8'));
+const userInfo = JSON.parse(fs.readFileSync('../data/userInfo.json','utf8'));
 
 let globalActivities = new GlobalActivities();
 let registerPage = new RegisterPage();
@@ -7,19 +11,11 @@ let registerPage = new RegisterPage();
 describe('Register the user information', async() => {
 
     beforeAll( async() => {
-        globalActivities.navigateToThePage("http://sahitest.com/demo/training/register.htm");
+        await globalActivities.navigateToThePage(links.register);
     });
 
     it('Send all the user information', async() => {
-        registerPage.setUsername("mfernanda");
-        registerPage.setPassword("abcd1234*");
-        registerPage.setPassword2("abcd1234*");
-        registerPage.chooseGender("female");
-        registerPage.setAddress("street 10a #40");
-        registerPage.setBillingAddress("Av 52 street");
-        registerPage.selectState("Kerala");
-        registerPage.markTermsAndCondition();
-        registerPage.sendFormRegister();
+        await registerPage.sendFormRegister(userInfo.username, userInfo.password, userInfo.password2, userInfo.gender, userInfo.address, userInfo.billingAddress, userInfo.state, userInfo.termsAndCondition);
         expect(await registerPage.getMessageAlert()).toEqual('Registered Successfully');
     });
 

@@ -1,21 +1,23 @@
-import { element, by, ElementFinder, ElementArrayFinder } from 'protractor';
+import { element, by, ElementFinder, ElementArrayFinder, $$ } from 'protractor';
 import { GlobalActivities } from '../pages/GlobalActivities';
 
 let globalActivities = new GlobalActivities();
 
 export class BooksPage {
+
+    addButton: ElementFinder = element(by.css("#available > input[type='button']:nth-child(4)"));
     
     public async addBooks(quantity: number, book: string) {
         await this.setBook(await this.findBookInTheTable(book), quantity);
+        await this.addButton.click();
     }
 
     private async findBookInTheTable(book: string): Promise<number>{
-        let tableData: HTMLElement = await document.getElementById("listing");
-        let numberOfRows: number = await tableData.childNodes.length;
         let position: number;
+        let numberOfRows: number = await element.all(by.css("#listing > tbody > tr")).count();
         for (let row: number = 2; row <= numberOfRows; row++) {
             let cellValue: string = await element(by.css("#listing > tbody > tr:nth-child(" + row + ") > td:nth-child(1)")).getText();
-            cellValue = await cellValue.trim();
+            cellValue = cellValue.trim();
             if (book == cellValue) {
                 position = row;
                 row = numberOfRows;
@@ -25,15 +27,24 @@ export class BooksPage {
     }
 
     private async setBook(position: number, quantity: number) {
-        element(by.css("#listing > tbody > tr: nth - child(" + position + ") > td: nth - child(4) > input[type = 'text']")).sendKeys(quantity);
+        let quantityTextInput: ElementFinder = element(by.css("#listing > tbody > tr:nth-child(" + position + ") > td:nth-child(4) > input[type = 'text']"));
+        await quantityTextInput.clear();
+        await quantityTextInput.sendKeys(quantity.toString());
     }
 
     public async getGrandTotal(): Promise<string> {
-        return await element(by.id("total")).getText();
+        return await element(by.id("total")).getAttribute("value");
     }
 
-    public calculateGrandTotal(): any {
-        //return await getTotalCostFromShoppingCart();
+    public async calculateGrandTotal(): Promise<string>  {
+        let totalSum: number = 0;
+        let numberOfRows: number = await element.all(by.css("#added > tbody > tr")).count();
+        for (let row: number = 2; row <= numberOfRows; row++) {
+            let cellValue: string = await element(by.css("#added > tbody > tr:nth-child(" + row + ") > td:nth-child(4)")).getText();
+            let newCellValue: string = cellValue.replace("Rs.", "");
+            totalSum = totalSum + parseInt(newCellValue);
+        }
+        return totalSum.toString();
     }
 
 }

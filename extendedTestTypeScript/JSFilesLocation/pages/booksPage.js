@@ -12,19 +12,22 @@ const protractor_1 = require("protractor");
 const GlobalActivities_1 = require("../pages/GlobalActivities");
 let globalActivities = new GlobalActivities_1.GlobalActivities();
 class BooksPage {
+    constructor() {
+        this.addButton = protractor_1.element(protractor_1.by.css("#available > input[type='button']:nth-child(4)"));
+    }
     addBooks(quantity, book) {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.setBook(yield this.findBookInTheTable(book), quantity);
+            yield this.addButton.click();
         });
     }
     findBookInTheTable(book) {
         return __awaiter(this, void 0, void 0, function* () {
-            let tableData = yield document.getElementById("listing");
-            let numberOfRows = yield tableData.childNodes.length;
             let position;
+            let numberOfRows = yield protractor_1.element.all(protractor_1.by.css("#listing > tbody > tr")).count();
             for (let row = 2; row <= numberOfRows; row++) {
                 let cellValue = yield protractor_1.element(protractor_1.by.css("#listing > tbody > tr:nth-child(" + row + ") > td:nth-child(1)")).getText();
-                cellValue = yield cellValue.trim();
+                cellValue = cellValue.trim();
                 if (book == cellValue) {
                     position = row;
                     row = numberOfRows;
@@ -35,17 +38,28 @@ class BooksPage {
     }
     setBook(position, quantity) {
         return __awaiter(this, void 0, void 0, function* () {
-            protractor_1.element(protractor_1.by.css("#listing > tbody > tr: nth - child(" + position + ") > td: nth - child(4) > input[type = 'text']")).sendKeys(quantity);
+            let quantityTextInput = protractor_1.element(protractor_1.by.css("#listing > tbody > tr:nth-child(" + position + ") > td:nth-child(4) > input[type = 'text']"));
+            yield quantityTextInput.clear();
+            yield quantityTextInput.sendKeys(quantity.toString());
         });
     }
     getGrandTotal() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield protractor_1.element(protractor_1.by.id("total")).getText();
+            return yield protractor_1.element(protractor_1.by.id("total")).getAttribute("value");
         });
     }
     calculateGrandTotal() {
-        //return await getTotalCostFromShoppingCart();
+        return __awaiter(this, void 0, void 0, function* () {
+            let totalSum = 0;
+            let numberOfRows = yield protractor_1.element.all(protractor_1.by.css("#added > tbody > tr")).count();
+            for (let row = 2; row <= numberOfRows; row++) {
+                let cellValue = yield protractor_1.element(protractor_1.by.css("#added > tbody > tr:nth-child(" + row + ") > td:nth-child(4)")).getText();
+                let newCellValue = cellValue.replace("Rs.", "");
+                totalSum = totalSum + parseInt(newCellValue);
+            }
+            return totalSum.toString();
+        });
     }
 }
 exports.BooksPage = BooksPage;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYm9va3NQYWdlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vcGFnZXMvYm9va3NQYWdlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7QUFBQSwyQ0FBNEU7QUFDNUUsZ0VBQTZEO0FBRTdELElBQUksZ0JBQWdCLEdBQUcsSUFBSSxtQ0FBZ0IsRUFBRSxDQUFDO0FBRTlDLE1BQWEsU0FBUztJQUVMLFFBQVEsQ0FBQyxRQUFnQixFQUFFLElBQVk7O1lBQ2hELE1BQU0sSUFBSSxDQUFDLE9BQU8sQ0FBQyxNQUFNLElBQUksQ0FBQyxrQkFBa0IsQ0FBQyxJQUFJLENBQUMsRUFBRSxRQUFRLENBQUMsQ0FBQztRQUN0RSxDQUFDO0tBQUE7SUFFYSxrQkFBa0IsQ0FBQyxJQUFZOztZQUN6QyxJQUFJLFNBQVMsR0FBZ0IsTUFBTSxRQUFRLENBQUMsY0FBYyxDQUFDLFNBQVMsQ0FBQyxDQUFDO1lBQ3RFLElBQUksWUFBWSxHQUFXLE1BQU0sU0FBUyxDQUFDLFVBQVUsQ0FBQyxNQUFNLENBQUM7WUFDN0QsSUFBSSxRQUFnQixDQUFDO1lBQ3JCLEtBQUssSUFBSSxHQUFHLEdBQVcsQ0FBQyxFQUFFLEdBQUcsSUFBSSxZQUFZLEVBQUUsR0FBRyxFQUFFLEVBQUU7Z0JBQ2xELElBQUksU0FBUyxHQUFXLE1BQU0sb0JBQU8sQ0FBQyxlQUFFLENBQUMsR0FBRyxDQUFDLGtDQUFrQyxHQUFHLEdBQUcsR0FBRyxxQkFBcUIsQ0FBQyxDQUFDLENBQUMsT0FBTyxFQUFFLENBQUM7Z0JBQzFILFNBQVMsR0FBRyxNQUFNLFNBQVMsQ0FBQyxJQUFJLEVBQUUsQ0FBQztnQkFDbkMsSUFBSSxJQUFJLElBQUksU0FBUyxFQUFFO29CQUNuQixRQUFRLEdBQUcsR0FBRyxDQUFDO29CQUNmLEdBQUcsR0FBRyxZQUFZLENBQUM7aUJBQ3RCO2FBQ0o7WUFDRCxPQUFPLFFBQVEsQ0FBQztRQUNwQixDQUFDO0tBQUE7SUFFYSxPQUFPLENBQUMsUUFBZ0IsRUFBRSxRQUFnQjs7WUFDcEQsb0JBQU8sQ0FBQyxlQUFFLENBQUMsR0FBRyxDQUFDLHFDQUFxQyxHQUFHLFFBQVEsR0FBRywrQ0FBK0MsQ0FBQyxDQUFDLENBQUMsUUFBUSxDQUFDLFFBQVEsQ0FBQyxDQUFDO1FBQzNJLENBQUM7S0FBQTtJQUVZLGFBQWE7O1lBQ3RCLE9BQU8sTUFBTSxvQkFBTyxDQUFDLGVBQUUsQ0FBQyxFQUFFLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQyxPQUFPLEVBQUUsQ0FBQztRQUNuRCxDQUFDO0tBQUE7SUFFTSxtQkFBbUI7UUFDdEIsOENBQThDO0lBQ2xELENBQUM7Q0FFSjtBQWpDRCw4QkFpQ0MifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYm9va3NQYWdlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vcGFnZXMvYm9va3NQYWdlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7QUFBQSwyQ0FBZ0Y7QUFDaEYsZ0VBQTZEO0FBRTdELElBQUksZ0JBQWdCLEdBQUcsSUFBSSxtQ0FBZ0IsRUFBRSxDQUFDO0FBRTlDLE1BQWEsU0FBUztJQUF0QjtRQUVJLGNBQVMsR0FBa0Isb0JBQU8sQ0FBQyxlQUFFLENBQUMsR0FBRyxDQUFDLGdEQUFnRCxDQUFDLENBQUMsQ0FBQztJQTBDakcsQ0FBQztJQXhDZ0IsUUFBUSxDQUFDLFFBQWdCLEVBQUUsSUFBWTs7WUFDaEQsTUFBTSxJQUFJLENBQUMsT0FBTyxDQUFDLE1BQU0sSUFBSSxDQUFDLGtCQUFrQixDQUFDLElBQUksQ0FBQyxFQUFFLFFBQVEsQ0FBQyxDQUFDO1lBQ2xFLE1BQU0sSUFBSSxDQUFDLFNBQVMsQ0FBQyxLQUFLLEVBQUUsQ0FBQztRQUNqQyxDQUFDO0tBQUE7SUFFYSxrQkFBa0IsQ0FBQyxJQUFZOztZQUN6QyxJQUFJLFFBQWdCLENBQUM7WUFDckIsSUFBSSxZQUFZLEdBQVcsTUFBTSxvQkFBTyxDQUFDLEdBQUcsQ0FBQyxlQUFFLENBQUMsR0FBRyxDQUFDLHVCQUF1QixDQUFDLENBQUMsQ0FBQyxLQUFLLEVBQUUsQ0FBQztZQUN0RixLQUFLLElBQUksR0FBRyxHQUFXLENBQUMsRUFBRSxHQUFHLElBQUksWUFBWSxFQUFFLEdBQUcsRUFBRSxFQUFFO2dCQUNsRCxJQUFJLFNBQVMsR0FBVyxNQUFNLG9CQUFPLENBQUMsZUFBRSxDQUFDLEdBQUcsQ0FBQyxrQ0FBa0MsR0FBRyxHQUFHLEdBQUcscUJBQXFCLENBQUMsQ0FBQyxDQUFDLE9BQU8sRUFBRSxDQUFDO2dCQUMxSCxTQUFTLEdBQUcsU0FBUyxDQUFDLElBQUksRUFBRSxDQUFDO2dCQUM3QixJQUFJLElBQUksSUFBSSxTQUFTLEVBQUU7b0JBQ25CLFFBQVEsR0FBRyxHQUFHLENBQUM7b0JBQ2YsR0FBRyxHQUFHLFlBQVksQ0FBQztpQkFDdEI7YUFDSjtZQUNELE9BQU8sUUFBUSxDQUFDO1FBQ3BCLENBQUM7S0FBQTtJQUVhLE9BQU8sQ0FBQyxRQUFnQixFQUFFLFFBQWdCOztZQUNwRCxJQUFJLGlCQUFpQixHQUFrQixvQkFBTyxDQUFDLGVBQUUsQ0FBQyxHQUFHLENBQUMsa0NBQWtDLEdBQUcsUUFBUSxHQUFHLDRDQUE0QyxDQUFDLENBQUMsQ0FBQztZQUNySixNQUFNLGlCQUFpQixDQUFDLEtBQUssRUFBRSxDQUFDO1lBQ2hDLE1BQU0saUJBQWlCLENBQUMsUUFBUSxDQUFDLFFBQVEsQ0FBQyxRQUFRLEVBQUUsQ0FBQyxDQUFDO1FBQzFELENBQUM7S0FBQTtJQUVZLGFBQWE7O1lBQ3RCLE9BQU8sTUFBTSxvQkFBTyxDQUFDLGVBQUUsQ0FBQyxFQUFFLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQyxZQUFZLENBQUMsT0FBTyxDQUFDLENBQUM7UUFDL0QsQ0FBQztLQUFBO0lBRVksbUJBQW1COztZQUM1QixJQUFJLFFBQVEsR0FBVyxDQUFDLENBQUM7WUFDekIsSUFBSSxZQUFZLEdBQVcsTUFBTSxvQkFBTyxDQUFDLEdBQUcsQ0FBQyxlQUFFLENBQUMsR0FBRyxDQUFDLHFCQUFxQixDQUFDLENBQUMsQ0FBQyxLQUFLLEVBQUUsQ0FBQztZQUNwRixLQUFLLElBQUksR0FBRyxHQUFXLENBQUMsRUFBRSxHQUFHLElBQUksWUFBWSxFQUFFLEdBQUcsRUFBRSxFQUFFO2dCQUNsRCxJQUFJLFNBQVMsR0FBVyxNQUFNLG9CQUFPLENBQUMsZUFBRSxDQUFDLEdBQUcsQ0FBQyxnQ0FBZ0MsR0FBRyxHQUFHLEdBQUcscUJBQXFCLENBQUMsQ0FBQyxDQUFDLE9BQU8sRUFBRSxDQUFDO2dCQUN4SCxJQUFJLFlBQVksR0FBVyxTQUFTLENBQUMsT0FBTyxDQUFDLEtBQUssRUFBRSxFQUFFLENBQUMsQ0FBQztnQkFDeEQsUUFBUSxHQUFHLFFBQVEsR0FBRyxRQUFRLENBQUMsWUFBWSxDQUFDLENBQUM7YUFDaEQ7WUFDRCxPQUFPLFFBQVEsQ0FBQyxRQUFRLEVBQUUsQ0FBQztRQUMvQixDQUFDO0tBQUE7Q0FFSjtBQTVDRCw4QkE0Q0MifQ==

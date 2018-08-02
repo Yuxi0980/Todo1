@@ -10,23 +10,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const globalActivities_1 = require("../pages/globalActivities");
 const registerPage_1 = require("../pages/registerPage");
+const fs = require("fs");
+const links = JSON.parse(fs.readFileSync('../data/links.json', 'utf8'));
+const userInfo = JSON.parse(fs.readFileSync('../data/userInfo.json', 'utf8'));
 let globalActivities = new globalActivities_1.GlobalActivities();
 let registerPage = new registerPage_1.RegisterPage();
 describe('Register the user information', () => __awaiter(this, void 0, void 0, function* () {
     beforeAll(() => __awaiter(this, void 0, void 0, function* () {
-        globalActivities.navigateToThePage("http://sahitest.com/demo/training/register.htm");
+        yield globalActivities.navigateToThePage(links.register);
     }));
     it('Send all the user information', () => __awaiter(this, void 0, void 0, function* () {
-        registerPage.setUsername("mfernanda");
-        registerPage.setPassword("abcd1234*");
-        registerPage.setPassword2("abcd1234*");
-        registerPage.chooseGender("female");
-        registerPage.setAddress("street 10a #40");
-        registerPage.setBillingAddress("Av 52 street");
-        registerPage.selectState("Kerala");
-        registerPage.markTermsAndCondition();
-        registerPage.sendFormRegister();
+        yield registerPage.sendFormRegister(userInfo.username, userInfo.password, userInfo.password2, userInfo.gender, userInfo.address, userInfo.billingAddress, userInfo.state, userInfo.termsAndCondition);
         expect(yield registerPage.getMessageAlert()).toEqual('Registered Successfully');
     }));
 }));
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVnaXN0ZXJTcGVjLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vc3BlY3MvcmVnaXN0ZXJTcGVjLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7QUFBQSxnRUFBNkQ7QUFDN0Qsd0RBQXFEO0FBRXJELElBQUksZ0JBQWdCLEdBQUcsSUFBSSxtQ0FBZ0IsRUFBRSxDQUFDO0FBQzlDLElBQUksWUFBWSxHQUFHLElBQUksMkJBQVksRUFBRSxDQUFDO0FBRXRDLFFBQVEsQ0FBQywrQkFBK0IsRUFBRSxHQUFRLEVBQUU7SUFFaEQsU0FBUyxDQUFFLEdBQVEsRUFBRTtRQUNqQixnQkFBZ0IsQ0FBQyxpQkFBaUIsQ0FBQyxnREFBZ0QsQ0FBQyxDQUFDO0lBQ3pGLENBQUMsQ0FBQSxDQUFDLENBQUM7SUFFSCxFQUFFLENBQUMsK0JBQStCLEVBQUUsR0FBUSxFQUFFO1FBQzFDLFlBQVksQ0FBQyxXQUFXLENBQUMsV0FBVyxDQUFDLENBQUM7UUFDdEMsWUFBWSxDQUFDLFdBQVcsQ0FBQyxXQUFXLENBQUMsQ0FBQztRQUN0QyxZQUFZLENBQUMsWUFBWSxDQUFDLFdBQVcsQ0FBQyxDQUFDO1FBQ3ZDLFlBQVksQ0FBQyxZQUFZLENBQUMsUUFBUSxDQUFDLENBQUM7UUFDcEMsWUFBWSxDQUFDLFVBQVUsQ0FBQyxnQkFBZ0IsQ0FBQyxDQUFDO1FBQzFDLFlBQVksQ0FBQyxpQkFBaUIsQ0FBQyxjQUFjLENBQUMsQ0FBQztRQUMvQyxZQUFZLENBQUMsV0FBVyxDQUFDLFFBQVEsQ0FBQyxDQUFDO1FBQ25DLFlBQVksQ0FBQyxxQkFBcUIsRUFBRSxDQUFDO1FBQ3JDLFlBQVksQ0FBQyxnQkFBZ0IsRUFBRSxDQUFDO1FBQ2hDLE1BQU0sQ0FBQyxNQUFNLFlBQVksQ0FBQyxlQUFlLEVBQUUsQ0FBQyxDQUFDLE9BQU8sQ0FBQyx5QkFBeUIsQ0FBQyxDQUFDO0lBQ3BGLENBQUMsQ0FBQSxDQUFDLENBQUM7QUFFUCxDQUFDLENBQUEsQ0FBQyxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVnaXN0ZXJTcGVjLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vc3BlY3MvcmVnaXN0ZXJTcGVjLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7QUFBQSxnRUFBNkQ7QUFDN0Qsd0RBQXFEO0FBQ3JELHlCQUF5QjtBQUV6QixNQUFNLEtBQUssR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLEVBQUUsQ0FBQyxZQUFZLENBQUMsb0JBQW9CLEVBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQztBQUN2RSxNQUFNLFFBQVEsR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLEVBQUUsQ0FBQyxZQUFZLENBQUMsdUJBQXVCLEVBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQztBQUU3RSxJQUFJLGdCQUFnQixHQUFHLElBQUksbUNBQWdCLEVBQUUsQ0FBQztBQUM5QyxJQUFJLFlBQVksR0FBRyxJQUFJLDJCQUFZLEVBQUUsQ0FBQztBQUV0QyxRQUFRLENBQUMsK0JBQStCLEVBQUUsR0FBUSxFQUFFO0lBRWhELFNBQVMsQ0FBRSxHQUFRLEVBQUU7UUFDakIsTUFBTSxnQkFBZ0IsQ0FBQyxpQkFBaUIsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLENBQUM7SUFDN0QsQ0FBQyxDQUFBLENBQUMsQ0FBQztJQUVILEVBQUUsQ0FBQywrQkFBK0IsRUFBRSxHQUFRLEVBQUU7UUFDMUMsTUFBTSxZQUFZLENBQUMsZ0JBQWdCLENBQUMsUUFBUSxDQUFDLFFBQVEsRUFBRSxRQUFRLENBQUMsUUFBUSxFQUFFLFFBQVEsQ0FBQyxTQUFTLEVBQUUsUUFBUSxDQUFDLE1BQU0sRUFBRSxRQUFRLENBQUMsT0FBTyxFQUFFLFFBQVEsQ0FBQyxjQUFjLEVBQUUsUUFBUSxDQUFDLEtBQUssRUFBRSxRQUFRLENBQUMsaUJBQWlCLENBQUMsQ0FBQztRQUN0TSxNQUFNLENBQUMsTUFBTSxZQUFZLENBQUMsZUFBZSxFQUFFLENBQUMsQ0FBQyxPQUFPLENBQUMseUJBQXlCLENBQUMsQ0FBQztJQUNwRixDQUFDLENBQUEsQ0FBQyxDQUFDO0FBRVAsQ0FBQyxDQUFBLENBQUMsQ0FBQyJ9
