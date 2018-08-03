@@ -21,7 +21,7 @@ class LoginPage {
     sendFormLogin(username, password) {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.usernameTextInput.sendKeys(username);
-            yield this.usernameTextInput.sendKeys(password);
+            yield this.passwordTextInput.sendKeys(password);
             yield this.loginButton.click();
         });
     }

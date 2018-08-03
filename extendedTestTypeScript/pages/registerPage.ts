@@ -8,14 +8,14 @@ export class RegisterPage {
     usernameTextInput: ElementFinder = element(by.name('username'));
     passwordTextInput: ElementFinder = element(by.name('password'));
     password2TextInput: ElementFinder = element(by.name('password2'));
-    maleRadioButton: ElementFinder = element(by.css('body > center > div > form > div > table > tbody > tr:nth-child(4) > td:nth-child(2) > input[type="radio"]:nth-child(1)'));
-    femaleRadioButton: ElementFinder = element(by.css('body > center > div > form > div > table > tbody > tr:nth-child(4) > td:nth-child(2) > input[type="radio"]:nth-child(2)'));
+    maleRadioButton: ElementFinder = element(by.css('input[value="M"]'));
+    femaleRadioButton: ElementFinder = element(by.css('input[value="F"]'));
     addressTextInput: ElementFinder = element(by.name('address'));
     billingAddressTextInput: ElementFinder = element(by.name('billaddress'));
     stateSelectInput: ElementFinder = $('[name="state"]');
     termsAndConditionsCheckBox: ElementFinder = element(by.name('agree'));
-    registerButton: ElementFinder = element(by.css('body > center > div > form > input[type="button"]:nth-child(5)'));
-
+    registerButton: ElementFinder = element(by.css('input[value="Register"]'));
+    
     public async sendFormRegister(username: string, password: string, password2: string, gender: string, address: string, billingAddress: string, state: string, TermsAndCondition: boolean) {
         await this.usernameTextInput.sendKeys(username);
         await this.passwordTextInput.sendKeys(password);

@@ -12,7 +12,7 @@ export class LoginPage {
 
     public async sendFormLogin(username: string, password: string) {
         await this.usernameTextInput.sendKeys(username);
-        await this.usernameTextInput.sendKeys(password);
+        await this.passwordTextInput.sendKeys(password);
         await this.loginButton.click();
     }
 

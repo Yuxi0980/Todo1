@@ -6,7 +6,10 @@
 	  "inlineSourceMap": true,
 	  "declaration": false,
 	  "noImplicitAny": false,
-	  "outDir": "JSFilesLocation"
+		"outDir": "JSFilesLocation",
+		"typeRoots": [
+			"./node_modules/@types"
+	]
 	},
 	"exclude": [
 	  "node_modules"

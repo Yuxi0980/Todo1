@@ -2,8 +2,8 @@ import { GlobalActivities } from '../pages/globalActivities';
 import { RegisterPage } from '../pages/registerPage';
 import * as fs from 'fs';
 
-const links = JSON.parse(fs.readFileSync('../data/links.json','utf8'));
-const userInfo = JSON.parse(fs.readFileSync('../data/userInfo.json','utf8'));
+const links = JSON.parse(fs.readFileSync('./data/links.json','utf8'));
+const userInfo = JSON.parse(fs.readFileSync('./data/userInfo.json','utf8'));
 
 let globalActivities = new GlobalActivities();
 let registerPage = new RegisterPage();

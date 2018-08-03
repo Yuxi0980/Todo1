@@ -5,7 +5,7 @@ let globalActivities = new GlobalActivities();
 
 export class BooksPage {
 
-    addButton: ElementFinder = element(by.css("#available > input[type='button']:nth-child(4)"));
+    addButton: ElementFinder = element(by.css('input[onclick="addToCart()"]'));
     
     public async addBooks(quantity: number, book: string) {
         await this.setBook(await this.findBookInTheTable(book), quantity);
@@ -17,7 +17,6 @@ export class BooksPage {
         let numberOfRows: number = await element.all(by.css("#listing > tbody > tr")).count();
         for (let row: number = 2; row <= numberOfRows; row++) {
             let cellValue: string = await element(by.css("#listing > tbody > tr:nth-child(" + row + ") > td:nth-child(1)")).getText();
-            cellValue = cellValue.trim();
             if (book == cellValue) {
                 position = row;
                 row = numberOfRows;
