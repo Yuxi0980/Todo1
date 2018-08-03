@@ -1,0 +1,30 @@
+{
+  "name": "exampleserenityscreenplay",
+  "version": "1.0.0",
+  "description": "this is a example automation test with Serenity integrated with ScreenPlay",
+  "main": "index.js",
+  "scripts": {
+    "test": "protractor conf.js",
+    "webdriver-update": "webdriver-manager update"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://fredyrydfe@bitbucket.org/fredyrydfe/repositorio-yuxi.git"
+  },
+  "author": "Fredy Saldarriaga Lema",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/fredyrydfe/repositorio-yuxi#readme",
+  "dependencies": {
+    "protractor": "^5.4.0",
+    "typescript": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/cucumber": "^4.0.4",
+    "@types/jasmine": "^2.8.8",
+    "@types/jasminewd2": "^2.0.3",
+    "cucumber": "^4.2.1",
+    "protractor-cucumber-framework": "^6.0.0",
+    "serenity-js": "^1.10.13",
+    "ts-node": "^7.0.0"
+  }
+}
