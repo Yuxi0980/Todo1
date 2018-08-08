@@ -1,14 +1,19 @@
 exports.config = {
+	
 	directConnect: true,
+	
 	seleniumAddress: 'http://localhost:4444/wd/hub',
-	specs: ['features/*.feature'],
-	framework: 'custom',
-	frameworkPath: require.resolve('serenity-js'),
+	
+    framework: 'custom',
+    frameworkPath: require.resolve('serenity-js'),
+
+	specs: ['features/**/*.feature'],
 
 	cucumberOpts: {
 		require: ['features/**/*.ts'],
 		format: 'pretty',
-		compiler: 'ts:ts-node/register'
+		compiler: 'ts:ts-node/register',
+		tags: ['@regression']
 	},
 
 	onPrepare: () => {
