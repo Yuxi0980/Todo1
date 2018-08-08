@@ -8,7 +8,6 @@
     "preprotractor": "webdriver-manager update",
     "pretest": "serenity update",
     "report": "serenity run",
-    "e2e": "cucumber-js features/**/*.feature",
     "test": "failsafe clean protractor report"
   },
   "repository": {

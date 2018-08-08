@@ -5,6 +5,6 @@ Feature: Login on the website
 
     @regression
     Scenario: send form with none information
-        Given user admin navigate to the login page
+        Given admin wants to login in the website
         When he send form login with none information
         Then he should see a message indicating "Invalid username or password"
