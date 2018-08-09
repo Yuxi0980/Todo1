@@ -6,6 +6,7 @@
   "scripts": {
     "clean": "rimraf target",
     "preprotractor": "webdriver-manager update",
+    "protractor": "protractor conf.js",
     "pretest": "serenity update",
     "report": "serenity run",
     "test": "failsafe clean protractor report"

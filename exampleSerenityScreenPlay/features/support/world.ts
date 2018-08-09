@@ -1,5 +1,5 @@
 import { serenity } from 'serenity-js';
-import { Actors } from '../../spec/Actors';
+import { Actors } from '../../spec/actors';
 
 export = function() {
     this.World = function() {

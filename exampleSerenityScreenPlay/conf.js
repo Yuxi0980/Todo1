@@ -19,6 +19,7 @@ exports.config = {
 	onPrepare: () => {
 		browser.manage().window().maximize();
 		browser.manage().timeouts().implicitlyWait(15000);
+		browser.waitForAngularEnabled(false);
 	},
 
 	capabilities: {

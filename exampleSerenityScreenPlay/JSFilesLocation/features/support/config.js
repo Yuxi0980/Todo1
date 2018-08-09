@@ -1,0 +1,5 @@
+"use strict";
+module.exports = function () {
+    this.setDefaultTimeout(30 * 1000);
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vZmVhdHVyZXMvc3VwcG9ydC9jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGlCQUFTO0lBQ0wsSUFBSSxDQUFDLGlCQUFpQixDQUFDLEVBQUUsR0FBRyxJQUFJLENBQUMsQ0FBQztBQUN0QyxDQUFDLENBQUMifQ==

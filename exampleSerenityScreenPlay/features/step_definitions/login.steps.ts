@@ -1,24 +1,52 @@
 import { Open } from 'serenity-js/lib/screenplay-protractor';
-import { FormLogin } from '../../spec/tasks/Login/FormLogin';
-import { IsTheMessageErrorVisible } from '../../spec/questions/Login/IsTheMessegeErrorVisible';
+import { SendFormLogin } from '../../spec/screenplay/tasks/login/SendFormLogin';
+import { IsTheMessageErrorVisible } from '../../spec/screenplay/questions/login/IsTheMessegeErrorVisible';
+import { IsTheBooksPageDisplayed } from '../../spec/screenplay/questions/login/IsTheBooksPageDisplayed';
+import * as fs from 'fs';
 
-export = function Login() {
+const links = JSON.parse(fs.readFileSync('./data/links.json', 'utf8'));
 
-    this.Given(/^(.*) wants to interact with AngularJS apps$/, function(actor: string) {
+export = async function Login() {
+
+    await this.Given(/^(.*) wants to login in the website$/, function (actor: string) {
         return this.stage.theActorCalled(actor).attemptsTo(
-            Open.browserOn('https://www.angularjs.org/'),
+            Open.browserOn(links.login),
         );
     });
 
-    this.When(/^he send form login with (.*) information$/, function(information: string) {
-        return this.stage.theActorInTheSpotlight().attemptsTo(
-            FormLogin.send(information),
-        );
+    await this.When(/^he send form login with (.*) information$/, function (parameter: string) {
+        switch (parameter) {
+            case 'none':
+                return this.stage.theActorInTheSpotlight().attemptsTo(
+                    SendFormLogin.withNoneInformation(parameter),
+                );
+                break;
+            case 'wrong':
+                return this.stage.theActorInTheSpotlight().attemptsTo(
+                    SendFormLogin.withWrongInformation(parameter),
+                );
+                break;
+            case 'right':
+                return this.stage.theActorInTheSpotlight().attemptsTo(
+                    SendFormLogin.withRightInformation(parameter),
+                );
+                break;
+            default:
+                break;
+        }
+
     });
 
-    this.Then(/^he should see a message indicating "([^"]*)"$/, function(message: string) {
+    await this.Then(/^he should see a message indicating "([^"]*)"$/, function (message: string) {
         return this.stage.theActorInTheSpotlight().attemptsTo(
             IsTheMessageErrorVisible.reads(message),
         );
     });
+
+    await this.Then(/^he should see the (.*) page$/, function (page: string) {
+        return this.stage.theActorInTheSpotlight().attemptsTo(
+            IsTheBooksPageDisplayed.see(page),
+        );
+    });
+
 };

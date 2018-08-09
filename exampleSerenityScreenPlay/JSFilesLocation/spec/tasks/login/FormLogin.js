@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const screenplay_protractor_1 = require("serenity-js/lib/screenplay-protractor");
+const LoginPage_1 = require("../../user_interface/LoginPage");
+const fs = require("fs");
+const users = JSON.parse(fs.readFileSync('./data/users.json', 'utf8'));
+exports.FormLogin = ({
+    send: (information) => screenplay_protractor_1.Task.where(`#actor send the form login with ${information} information`, screenplay_protractor_1.Enter.theValue(users.wrong.username).into(LoginPage_1.LoginPage.usernameField), screenplay_protractor_1.Enter.theValue(users.wrong.password).into(LoginPage_1.LoginPage.passwordField), screenplay_protractor_1.Click.on(LoginPage_1.LoginPage.loginButton)),
+    clear: () => screenplay_protractor_1.Task.where('#actor clear the form login information', screenplay_protractor_1.Clear.theValueOf(LoginPage_1.LoginPage.usernameField), screenplay_protractor_1.Clear.theValueOf(LoginPage_1.LoginPage.passwordField)),
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRm9ybUxvZ2luLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vc3BlYy90YXNrcy9sb2dpbi9Gb3JtTG9naW4udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpRkFBa0Y7QUFDbEYsOERBQTJEO0FBQzNELHlCQUF5QjtBQUV6QixNQUFNLEtBQUssR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLEVBQUUsQ0FBQyxZQUFZLENBQUMsbUJBQW1CLEVBQUUsTUFBTSxDQUFDLENBQUMsQ0FBQztBQUUxRCxRQUFBLFNBQVMsR0FBRyxDQUFDO0lBRXRCLElBQUksRUFBRSxDQUFDLFdBQW1CLEVBQUUsRUFBRSxDQUFDLDRCQUFJLENBQUMsS0FBSyxDQUFDLG1DQUFtQyxXQUFXLGNBQWMsRUFDOUYsNkJBQUssQ0FBQyxRQUFRLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxRQUFRLENBQUMsQ0FBQyxJQUFJLENBQUMscUJBQVMsQ0FBQyxhQUFhLENBQUMsRUFDbEUsNkJBQUssQ0FBQyxRQUFRLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxRQUFRLENBQUMsQ0FBQyxJQUFJLENBQUMscUJBQVMsQ0FBQyxhQUFhLENBQUMsRUFDbEUsNkJBQUssQ0FBQyxFQUFFLENBQUMscUJBQVMsQ0FBQyxXQUFXLENBQUMsQ0FDdEM7SUFFRCxLQUFLLEVBQUUsR0FBRyxFQUFFLENBQUMsNEJBQUksQ0FBQyxLQUFLLENBQUMseUNBQXlDLEVBQzdELDZCQUFLLENBQUMsVUFBVSxDQUFDLHFCQUFTLENBQUMsYUFBYSxDQUFDLEVBQ3pDLDZCQUFLLENBQUMsVUFBVSxDQUFDLHFCQUFTLENBQUMsYUFBYSxDQUFDLENBQzVDO0NBQ0osQ0FBQyxDQUFDIn0=
