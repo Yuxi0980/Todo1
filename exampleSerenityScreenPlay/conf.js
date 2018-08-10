@@ -13,7 +13,7 @@ exports.config = {
 		require: ['features/**/*.ts'],
 		format: 'pretty',
 		compiler: 'ts:ts-node/register',
-		tags: ['@smoketest']
+		tags: ['@regression2']
 	},
 
 	onPrepare: () => {

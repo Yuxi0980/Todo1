@@ -8,7 +8,7 @@ const links = JSON.parse(fs.readFileSync('./data/links.json', 'utf8'));
 
 export = async function Login() {
 
-    await this.Given(/^(.*) wants to login in the website$/, function (actor: string){
+    await this.Given(/^(.*) wants to login on website$/, function (actor: string){
         return this.stage.theActorCalled(actor).attemptsTo(
             Open.browserOn(links.login),
         );
