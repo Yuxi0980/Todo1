@@ -1,9 +1,9 @@
-Feature: Login on the website
+Feature: Login on website
     As a admin user
-    I want to login in the website
+    I want to login on website
     So that only users with permisions could enter to the website
 
-    @regression
+    @regression @smoketest
     Scenario: send form login with none information
         Given admin wants to login in the website
         When he send form login with none information
@@ -19,4 +19,4 @@ Feature: Login on the website
     Scenario: send form login with right information
         Given admin wants to login in the website
         When he send form login with right information
-        Then he should see the Books page
+        Then he should see "All available books"
