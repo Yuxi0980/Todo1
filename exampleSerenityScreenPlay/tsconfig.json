@@ -2,10 +2,12 @@
 	"compilerOptions": {
 	  "target": "es6",
 	  "module": "commonjs",
-	  "moduleResolution": "node",
-	  "inlineSourceMap": true,
-	  "declaration": false,
-	  "noImplicitAny": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "declaration": false,
+    "noStrictGenericChecks": true, //this solve the problem errors when transpiling
 		"outDir": "JSFilesLocation",
 		"typeRoots": [
 			"./node_modules/@types"

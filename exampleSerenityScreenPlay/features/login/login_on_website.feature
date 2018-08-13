@@ -3,7 +3,7 @@ Feature: Login on website
     I want to login on website
     So that only users with permisions could enter to the website
 
-    @regression2
+    @regression
     Scenario: send form login with none information
         Given admin wants to login on website
         When he send form login with none information

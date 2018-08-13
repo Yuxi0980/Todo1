@@ -23,5 +23,5 @@ export const SendFormLogin = ({
         Enter.theValue(users.right.password).into(LoginPage.passwordField),
         Click.on(LoginPage.loginButton)
     ),
-    
+
 });

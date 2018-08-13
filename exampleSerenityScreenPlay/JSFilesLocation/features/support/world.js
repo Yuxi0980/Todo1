@@ -6,4 +6,4 @@ module.exports = function () {
         this.stage = serenity_js_1.serenity.callToStageFor(new actors_1.Actors());
     };
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid29ybGQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi9mZWF0dXJlcy9zdXBwb3J0L3dvcmxkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSw2Q0FBdUM7QUFDdkMseURBQXNEO0FBRXRELGlCQUFTO0lBQ0wsSUFBSSxDQUFDLEtBQUssR0FBRztRQUNULElBQUksQ0FBQyxLQUFLLEdBQUcsc0JBQVEsQ0FBQyxjQUFjLENBQUMsSUFBSSxlQUFNLEVBQUUsQ0FBQyxDQUFDO0lBQ3ZELENBQUMsQ0FBQztBQUNOLENBQUMsQ0FBQyJ9
+//# sourceMappingURL=world.js.map

@@ -6,4 +6,5 @@ export const LoginPage = {
     passwordField: Target.the('password field').located(by.name('password')),
     loginButton: Target.the('login button').located(by.css('input[onclick="login()"]')),
     messageError: Target.the('message error').located(by.id('errorMessage')),
+    registerLink: Target.the('register option').located(by.linkText('Register')),
 };

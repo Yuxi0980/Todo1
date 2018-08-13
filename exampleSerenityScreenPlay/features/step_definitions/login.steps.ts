@@ -8,7 +8,7 @@ const links = JSON.parse(fs.readFileSync('./data/links.json', 'utf8'));
 
 export = async function Login() {
 
-    await this.Given(/^(.*) wants to login on website$/, function (actor: string){
+    await this.Given(/^(.*) wants to login on website$/, function (actor: string) {
         return this.stage.theActorCalled(actor).attemptsTo(
             Open.browserOn(links.login),
         );
@@ -43,9 +43,9 @@ export = async function Login() {
         );
     });
 
-    await this.Then(/^he should see "([^"]*)"$/, function (title: string) {
+    await this.Then(/^he should see "([^"]*)"$/, async function (title: string) {
         return this.stage.theActorInTheSpotlight().attemptsTo(
-            IsTheBooksPageDisplayed.see(title),
+            await IsTheBooksPageDisplayed.see(title),
         );
     });
 
