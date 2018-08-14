@@ -8,27 +8,27 @@ const links = JSON.parse(fs.readFileSync('./data/links.json', 'utf8'));
 
 export = async function Login() {
 
-    await this.Given(/^(.*) wants to login on website$/, function (actor: string) {
+    await this.Given(/^(.*) wants to login on website$/, async function (actor: string) {
         return this.stage.theActorCalled(actor).attemptsTo(
-            Open.browserOn(links.login),
+            await Open.browserOn(links.login),
         );
     });
 
-    await this.When(/^he send form login with (.*) information$/, function (parameter: string) {
+    await this.When(/^he send form login with (.*) information$/, async function (parameter: string) {
         switch (parameter) {
             case 'none':
                 return this.stage.theActorInTheSpotlight().attemptsTo(
-                    SendFormLogin.withNoneInformation(parameter),
+                    await SendFormLogin.withNoneInformation(parameter),
                 );
                 break;
             case 'wrong':
                 return this.stage.theActorInTheSpotlight().attemptsTo(
-                    SendFormLogin.withWrongInformation(parameter),
+                    await SendFormLogin.withWrongInformation(parameter),
                 );
                 break;
             case 'right':
                 return this.stage.theActorInTheSpotlight().attemptsTo(
-                    SendFormLogin.withRightInformation(parameter),
+                    await SendFormLogin.withRightInformation(parameter),
                 );
                 break;
             default:
@@ -37,9 +37,9 @@ export = async function Login() {
 
     });
 
-    await this.Then(/^he should see a message indicating "([^"]*)"$/, function (message: string) {
+    await this.Then(/^he should see a message indicating "([^"]*)"$/, async function (message: string) {
         return this.stage.theActorInTheSpotlight().attemptsTo(
-            IsTheMessageErrorVisible.reads(message),
+            await IsTheMessageErrorVisible.reads(message),
         );
     });
 

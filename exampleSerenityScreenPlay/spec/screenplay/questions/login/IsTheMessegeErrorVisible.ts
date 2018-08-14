@@ -4,7 +4,7 @@ import { equals } from '../../assertions';
 import { LoginPage } from '../../user_interface/LoginPage';
 
 export const IsTheMessageErrorVisible = ({
-    reads: (expectedMessage: string) => Task.where(`#actor checks if the message error reads ${expectedMessage}`,
-        See.if(Text.of(LoginPage.messageError), equals(expectedMessage))
+    reads: async (expectedMessage: string) => Task.where(`#actor checks if the message error reads ${expectedMessage}`,
+        await See.if(Text.of(LoginPage.messageError), equals(expectedMessage))
     ),
 });

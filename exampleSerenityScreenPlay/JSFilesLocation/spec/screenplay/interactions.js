@@ -8,12 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const screenplay_protractor_1 = require("serenity-js/lib/screenplay-protractor");
-const assertions_1 = require("../../assertions");
-const LoginPage_1 = require("../../user_interface/LoginPage");
-exports.IsTheMessageErrorVisible = ({
-    reads: (expectedMessage) => __awaiter(this, void 0, void 0, function* () {
-        return screenplay_protractor_1.Task.where(`#actor checks if the message error reads ${expectedMessage}`, yield screenplay_protractor_1.See.if(screenplay_protractor_1.Text.of(LoginPage_1.LoginPage.messageError), assertions_1.equals(expectedMessage)));
+const protractor_1 = require("protractor");
+const protractor_2 = require("serenity-js/protractor");
+exports.Window = {
+    switchToFrame: (index) => __awaiter(this, void 0, void 0, function* () {
+        return protractor_2.Interaction.where(`#actor switches to a frame`, () => {
+            return protractor_1.protractor.browser.driver.switchTo().frame(index);
+        });
     }),
-});
-//# sourceMappingURL=IsTheMessegeErrorVisible.js.map
+};
+//# sourceMappingURL=interactions.js.map

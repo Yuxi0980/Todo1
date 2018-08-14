@@ -15,10 +15,14 @@ const links = JSON.parse(fs.readFileSync('./data/links.json', 'utf8'));
 module.exports = function Register() {
     return __awaiter(this, void 0, void 0, function* () {
         yield this.Given(/^(.*) wants to register on website$/, function (actor) {
-            return this.stage.theActorCalled(actor).attemptsTo(screenplay_protractor_1.Open.browserOn(links.login), NavigateTo_1.NavigateTo.registerLink());
+            return __awaiter(this, void 0, void 0, function* () {
+                return this.stage.theActorCalled(actor).attemptsTo(yield screenplay_protractor_1.Open.browserOn(links.login), yield NavigateTo_1.NavigateTo.registerLink());
+            });
         });
         yield this.When(/^he send form register with all information$/, function () {
-            return this.stage.theActorInTheSpotlight().attemptsTo(SendFormRegister_1.SendFormRegister.withAllInformation());
+            return __awaiter(this, void 0, void 0, function* () {
+                return this.stage.theActorInTheSpotlight().attemptsTo(yield SendFormRegister_1.SendFormRegister.withAllInformation());
+            });
         });
     });
 };

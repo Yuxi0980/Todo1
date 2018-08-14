@@ -4,7 +4,7 @@ import { equals } from '../../assertions';
 import { BooksPage } from '../../user_interface/BooksPage';
 
 export const IsTheBooksPageDisplayed = ({
-    see: (expectedTitle: string) => Task.where(`#actor checks if the ${expectedTitle} page is displayed`,
-        See.if(Text.of(BooksPage.title), equals(expectedTitle))
+    see: async (expectedTitle: string) => Task.where(`#actor checks if the ${expectedTitle} page is displayed`,
+        await See.if(Text.of(BooksPage.title), equals(expectedTitle))
     ),
 });

@@ -8,12 +8,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const screenplay_protractor_1 = require("serenity-js/lib/screenplay-protractor");
-const assertions_1 = require("../../assertions");
-const LoginPage_1 = require("../../user_interface/LoginPage");
-exports.IsTheMessageErrorVisible = ({
-    reads: (expectedMessage) => __awaiter(this, void 0, void 0, function* () {
-        return screenplay_protractor_1.Task.where(`#actor checks if the message error reads ${expectedMessage}`, yield screenplay_protractor_1.See.if(screenplay_protractor_1.Text.of(LoginPage_1.LoginPage.messageError), assertions_1.equals(expectedMessage)));
-    }),
-});
-//# sourceMappingURL=IsTheMessegeErrorVisible.js.map
+const protractor_1 = require("protractor");
+class Utilities {
+    constructor() {
+        this.alertMessage = protractor_1.browser.switchTo().alert();
+    }
+    getAlertText() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.alertMessage.getText();
+        });
+    }
+}
+exports.Utilities = Utilities;
+//# sourceMappingURL=commonMethods.js.map

@@ -2,9 +2,9 @@ import { IsTheAlertMessageVisible } from '../../spec/screenplay/questions/common
 
 export = async function Common() {
 
-    await this.Then(/^he should see a alert message indicating "([^"]*)"$/, function (message: string) {
+    await this.Then(/^he should see a alert message indicating "([^"]*)"$/, async (message: string) => {
         return this.stage.theActorInTheSpotlight().attemptsTo(
-            IsTheAlertMessageVisible.reads(message),
+            await IsTheAlertMessageVisible.reads(message),
         );
     });
 

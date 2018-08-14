@@ -16,25 +16,31 @@ const links = JSON.parse(fs.readFileSync('./data/links.json', 'utf8'));
 module.exports = function Login() {
     return __awaiter(this, void 0, void 0, function* () {
         yield this.Given(/^(.*) wants to login on website$/, function (actor) {
-            return this.stage.theActorCalled(actor).attemptsTo(screenplay_protractor_1.Open.browserOn(links.login));
+            return __awaiter(this, void 0, void 0, function* () {
+                return this.stage.theActorCalled(actor).attemptsTo(yield screenplay_protractor_1.Open.browserOn(links.login));
+            });
         });
         yield this.When(/^he send form login with (.*) information$/, function (parameter) {
-            switch (parameter) {
-                case 'none':
-                    return this.stage.theActorInTheSpotlight().attemptsTo(SendFormLogin_1.SendFormLogin.withNoneInformation(parameter));
-                    break;
-                case 'wrong':
-                    return this.stage.theActorInTheSpotlight().attemptsTo(SendFormLogin_1.SendFormLogin.withWrongInformation(parameter));
-                    break;
-                case 'right':
-                    return this.stage.theActorInTheSpotlight().attemptsTo(SendFormLogin_1.SendFormLogin.withRightInformation(parameter));
-                    break;
-                default:
-                    break;
-            }
+            return __awaiter(this, void 0, void 0, function* () {
+                switch (parameter) {
+                    case 'none':
+                        return this.stage.theActorInTheSpotlight().attemptsTo(yield SendFormLogin_1.SendFormLogin.withNoneInformation(parameter));
+                        break;
+                    case 'wrong':
+                        return this.stage.theActorInTheSpotlight().attemptsTo(yield SendFormLogin_1.SendFormLogin.withWrongInformation(parameter));
+                        break;
+                    case 'right':
+                        return this.stage.theActorInTheSpotlight().attemptsTo(yield SendFormLogin_1.SendFormLogin.withRightInformation(parameter));
+                        break;
+                    default:
+                        break;
+                }
+            });
         });
         yield this.Then(/^he should see a message indicating "([^"]*)"$/, function (message) {
-            return this.stage.theActorInTheSpotlight().attemptsTo(IsTheMessegeErrorVisible_1.IsTheMessageErrorVisible.reads(message));
+            return __awaiter(this, void 0, void 0, function* () {
+                return this.stage.theActorInTheSpotlight().attemptsTo(yield IsTheMessegeErrorVisible_1.IsTheMessageErrorVisible.reads(message));
+            });
         });
         yield this.Then(/^he should see "([^"]*)"$/, function (title) {
             return __awaiter(this, void 0, void 0, function* () {

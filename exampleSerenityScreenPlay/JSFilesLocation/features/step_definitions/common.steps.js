@@ -10,9 +10,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 const IsTheAlertMessageVisible_1 = require("../../spec/screenplay/questions/common/IsTheAlertMessageVisible");
 module.exports = function Common() {
     return __awaiter(this, void 0, void 0, function* () {
-        yield this.Then(/^he should see a alert message indicating "([^"]*)"$/, function (message) {
-            return this.stage.theActorInTheSpotlight().attemptsTo(IsTheAlertMessageVisible_1.IsTheAlertMessageVisible.reads(message));
-        });
+        yield this.Then(/^he should see a alert message indicating "([^"]*)"$/, (message) => __awaiter(this, void 0, void 0, function* () {
+            return this.stage.theActorInTheSpotlight().attemptsTo(yield IsTheAlertMessageVisible_1.IsTheAlertMessageVisible.reads(message));
+        }));
     });
 };
 //# sourceMappingURL=common.steps.js.map

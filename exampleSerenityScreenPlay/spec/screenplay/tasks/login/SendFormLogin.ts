@@ -6,22 +6,22 @@ const users = JSON.parse(fs.readFileSync('./data/users.json', 'utf8'));
 
 export const SendFormLogin = ({
 
-    withNoneInformation: (parameter: string) => Task.where(`#actor send the form login with ${parameter} information`,
-        Clear.theValueOf(LoginPage.usernameField),
-        Clear.theValueOf(LoginPage.passwordField),
-        Click.on(LoginPage.loginButton)
+    withNoneInformation: async (parameter: string) => Task.where(`#actor send the form login with ${parameter} information`,
+        await Clear.theValueOf(LoginPage.usernameField),
+        await Clear.theValueOf(LoginPage.passwordField),
+        await Click.on(LoginPage.loginButton)
     ),
 
-    withWrongInformation: (parameter: string) => Task.where(`#actor send the form login with ${parameter} information`,
-        Enter.theValue(users.wrong.username).into(LoginPage.usernameField),
-        Enter.theValue(users.wrong.password).into(LoginPage.passwordField),
-        Click.on(LoginPage.loginButton)
+    withWrongInformation: async (parameter: string) => Task.where(`#actor send the form login with ${parameter} information`,
+        await Enter.theValue(users.wrong.username).into(LoginPage.usernameField),
+        await Enter.theValue(users.wrong.password).into(LoginPage.passwordField),
+        await Click.on(LoginPage.loginButton)
     ),
 
-    withRightInformation: (parameter: string) => Task.where(`#actor send the form login with ${parameter} information`,
-        Enter.theValue(users.right.username).into(LoginPage.usernameField),
-        Enter.theValue(users.right.password).into(LoginPage.passwordField),
-        Click.on(LoginPage.loginButton)
+    withRightInformation: async (parameter: string) => Task.where(`#actor send the form login with ${parameter} information`,
+        await Enter.theValue(users.right.username).into(LoginPage.usernameField),
+        await Enter.theValue(users.right.password).into(LoginPage.passwordField),
+        await Click.on(LoginPage.loginButton)
     ),
 
 });
