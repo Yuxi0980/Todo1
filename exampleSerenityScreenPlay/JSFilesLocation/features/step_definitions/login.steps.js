@@ -22,19 +22,7 @@ module.exports = function Login() {
         });
         yield this.When(/^he send form login with (.*) information$/, function (parameter) {
             return __awaiter(this, void 0, void 0, function* () {
-                switch (parameter) {
-                    case 'none':
-                        return this.stage.theActorInTheSpotlight().attemptsTo(yield SendFormLogin_1.SendFormLogin.withNoneInformation(parameter));
-                        break;
-                    case 'wrong':
-                        return this.stage.theActorInTheSpotlight().attemptsTo(yield SendFormLogin_1.SendFormLogin.withWrongInformation(parameter));
-                        break;
-                    case 'right':
-                        return this.stage.theActorInTheSpotlight().attemptsTo(yield SendFormLogin_1.SendFormLogin.withRightInformation(parameter));
-                        break;
-                    default:
-                        break;
-                }
+                return this.stage.theActorInTheSpotlight().attemptsTo(yield SendFormLogin_1.SendFormLogin.with(parameter));
             });
         });
         yield this.Then(/^he should see a message indicating "([^"]*)"$/, function (message) {
@@ -42,7 +30,7 @@ module.exports = function Login() {
                 return this.stage.theActorInTheSpotlight().attemptsTo(yield IsTheMessegeErrorVisible_1.IsTheMessageErrorVisible.reads(message));
             });
         });
-        yield this.Then(/^he should see "([^"]*)"$/, function (title) {
+        yield this.Then(/^he should see the (.*) page$/, function (title) {
             return __awaiter(this, void 0, void 0, function* () {
                 return this.stage.theActorInTheSpotlight().attemptsTo(yield IsTheBooksPageDisplayed_1.IsTheBooksPageDisplayed.see(title));
             });

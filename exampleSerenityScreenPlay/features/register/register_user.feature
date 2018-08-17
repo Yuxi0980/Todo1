@@ -6,5 +6,5 @@ Feature: Register user information
     @regression
     Scenario: register on website
         Given Fredy wants to register on website
-        When he send form register with all information
+        When he send form register with "all" information
         Then he should see a alert message indicating "Registered Successfully"

@@ -1,13 +1,18 @@
-import { Task, Click } from 'serenity-js/lib/screenplay-protractor';
+import { Task, Click, PerformsTasks } from 'serenity-js/lib/screenplay-protractor';
 import { LoginPage } from '../../user_interface/LoginPage';
-import * as fs from 'fs';
 
-const users = JSON.parse(fs.readFileSync('./data/users.json', 'utf8'));
+export class NavigateTo implements Task {
 
-export const NavigateTo = ({
+    static registerLink() {
+        return new NavigateTo();
+    }
 
-    registerLink: async () => Task.where(`#actor navigate to register page`,
-        await Click.on(LoginPage.registerLink)
-    ),
-    
-});
+    performAs(actor: PerformsTasks) {
+        return actor.attemptsTo(
+            Click.on(LoginPage.registerLink)
+        )
+    }
+
+    constructor() { }
+
+}

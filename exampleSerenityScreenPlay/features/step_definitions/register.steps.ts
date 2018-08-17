@@ -1,6 +1,7 @@
 import { Open, Execute } from 'serenity-js/lib/screenplay-protractor';
 import { NavigateTo } from '../../spec/screenplay/tasks/login/NavigateTo';
 import { SendFormRegister } from '../../spec/screenplay/tasks/register/SendFormRegister';
+import { IsTheAlertMessageVisible } from '../../spec/screenplay/questions/register/IsTheAlertMessageVisible';
 
 import * as fs from 'fs';
 
@@ -15,9 +16,15 @@ export = async function Register() {
         );
     });
 
-    await this.When(/^he send form register with all information$/, async function () {
+    await this.When(/^he send form register with "([^"]*)" information$/, async function (parameter: string) {
         return this.stage.theActorInTheSpotlight().attemptsTo(
-            await SendFormRegister.withAllInformation()
+            await SendFormRegister.with(parameter)
+        );
+    });
+
+    await this.Then(/^he should see a alert message indicating "([^"]*)"$/, async function (message: string) {
+        return this.stage.theActorInTheSpotlight().attemptsTo(
+            await IsTheAlertMessageVisible.reads(message),
         );
     });
 

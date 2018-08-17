@@ -1,10 +1,10 @@
-import {See, Task, Text } from 'serenity-js/lib/screenplay-protractor';
+import { See, Text, Task } from 'serenity-js/lib/screenplay-protractor';
 
 import { equals } from '../../assertions';
 import { LoginPage } from '../../user_interface/LoginPage';
 
 export const IsTheMessageErrorVisible = ({
-    reads: async (expectedMessage: string) => Task.where(`#actor checks if the message error reads ${expectedMessage}`,
-        await See.if(Text.of(LoginPage.messageError), equals(expectedMessage))
+    reads: (expectedMessage: string) => Task.where(`#actor checks if the message error reads ${expectedMessage}`,
+        See.if(Text.of(LoginPage.messageError), equals(expectedMessage)),
     ),
 });

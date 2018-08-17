@@ -1,27 +1,41 @@
-import { Enter, Task, Click, Clear } from 'serenity-js/lib/screenplay-protractor';
+import { Enter, Task, Click, Clear, PerformsTasks } from 'serenity-js/lib/screenplay-protractor';
 import { LoginPage } from '../../user_interface/LoginPage';
 import * as fs from 'fs';
 
 const users = JSON.parse(fs.readFileSync('./data/users.json', 'utf8'));
 
-export const SendFormLogin = ({
+export class SendFormLogin implements Task {
 
-    withNoneInformation: async (parameter: string) => Task.where(`#actor send the form login with ${parameter} information`,
-        await Clear.theValueOf(LoginPage.usernameField),
-        await Clear.theValueOf(LoginPage.passwordField),
-        await Click.on(LoginPage.loginButton)
-    ),
+    static with(parameter: string) {
+        return new SendFormLogin(parameter);
+    }
 
-    withWrongInformation: async (parameter: string) => Task.where(`#actor send the form login with ${parameter} information`,
-        await Enter.theValue(users.wrong.username).into(LoginPage.usernameField),
-        await Enter.theValue(users.wrong.password).into(LoginPage.passwordField),
-        await Click.on(LoginPage.loginButton)
-    ),
+    async performAs(actor: PerformsTasks) {
+        switch (this.parameter) {
+            case 'none':
+                return actor.attemptsTo(
+                    await Clear.theValueOf(LoginPage.usernameField),
+                    await Clear.theValueOf(LoginPage.passwordField),
+                    await Click.on(LoginPage.loginButton)
+                )
+            case 'wrong':
+                return actor.attemptsTo(
+                    await Enter.theValue(users.wrong.username).into(LoginPage.usernameField),
+                    await Enter.theValue(users.wrong.password).into(LoginPage.passwordField),
+                    await Click.on(LoginPage.loginButton)
+                )
+            case 'right':
+                return actor.attemptsTo(
+                    await Enter.theValue(users.right.username).into(LoginPage.usernameField),
+                    await Enter.theValue(users.right.password).into(LoginPage.passwordField),
+                    await Click.on(LoginPage.loginButton)
+                )
+            default:
+                break;
+        }
 
-    withRightInformation: async (parameter: string) => Task.where(`#actor send the form login with ${parameter} information`,
-        await Enter.theValue(users.right.username).into(LoginPage.usernameField),
-        await Enter.theValue(users.right.password).into(LoginPage.passwordField),
-        await Click.on(LoginPage.loginButton)
-    ),
+    }
 
-});
+    constructor(private parameter: string) {}
+
+} 

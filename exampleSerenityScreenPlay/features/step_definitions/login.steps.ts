@@ -15,26 +15,9 @@ export = async function Login() {
     });
 
     await this.When(/^he send form login with (.*) information$/, async function (parameter: string) {
-        switch (parameter) {
-            case 'none':
-                return this.stage.theActorInTheSpotlight().attemptsTo(
-                    await SendFormLogin.withNoneInformation(parameter),
-                );
-                break;
-            case 'wrong':
-                return this.stage.theActorInTheSpotlight().attemptsTo(
-                    await SendFormLogin.withWrongInformation(parameter),
-                );
-                break;
-            case 'right':
-                return this.stage.theActorInTheSpotlight().attemptsTo(
-                    await SendFormLogin.withRightInformation(parameter),
-                );
-                break;
-            default:
-                break;
-        }
-
+        return this.stage.theActorInTheSpotlight().attemptsTo(
+            await SendFormLogin.with(parameter),
+        );
     });
 
     await this.Then(/^he should see a message indicating "([^"]*)"$/, async function (message: string) {
@@ -43,7 +26,7 @@ export = async function Login() {
         );
     });
 
-    await this.Then(/^he should see "([^"]*)"$/, async function (title: string) {
+    await this.Then(/^he should see the (.*) page$/, async function (title: string) {
         return this.stage.theActorInTheSpotlight().attemptsTo(
             await IsTheBooksPageDisplayed.see(title),
         );

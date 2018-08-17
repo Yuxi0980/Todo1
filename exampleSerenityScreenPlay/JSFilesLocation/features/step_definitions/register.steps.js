@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 const screenplay_protractor_1 = require("serenity-js/lib/screenplay-protractor");
 const NavigateTo_1 = require("../../spec/screenplay/tasks/login/NavigateTo");
 const SendFormRegister_1 = require("../../spec/screenplay/tasks/register/SendFormRegister");
+const IsTheAlertMessageVisible_1 = require("../../spec/screenplay/questions/register/IsTheAlertMessageVisible");
 const fs = require("fs");
 const links = JSON.parse(fs.readFileSync('./data/links.json', 'utf8'));
 module.exports = function Register() {
@@ -19,9 +20,14 @@ module.exports = function Register() {
                 return this.stage.theActorCalled(actor).attemptsTo(yield screenplay_protractor_1.Open.browserOn(links.login), yield NavigateTo_1.NavigateTo.registerLink());
             });
         });
-        yield this.When(/^he send form register with all information$/, function () {
+        yield this.When(/^he send form register with "([^"]*)" information$/, function (parameter) {
             return __awaiter(this, void 0, void 0, function* () {
-                return this.stage.theActorInTheSpotlight().attemptsTo(yield SendFormRegister_1.SendFormRegister.withAllInformation());
+                return this.stage.theActorInTheSpotlight().attemptsTo(yield SendFormRegister_1.SendFormRegister.with(parameter));
+            });
+        });
+        yield this.Then(/^he should see a alert message indicating "([^"]*)"$/, function (message) {
+            return __awaiter(this, void 0, void 0, function* () {
+                return this.stage.theActorInTheSpotlight().attemptsTo(yield IsTheAlertMessageVisible_1.IsTheAlertMessageVisible.reads(message));
             });
         });
     });

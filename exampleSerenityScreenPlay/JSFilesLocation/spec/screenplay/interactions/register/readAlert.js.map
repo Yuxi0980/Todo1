@@ -1,0 +1,1 @@
+{"version":3,"file":"readAlert.js","sourceRoot":"","sources":["../../../../../spec/screenplay/interactions/register/readAlert.ts"],"names":[],"mappings":";;AAAA,2CAAqC;AAExB,QAAA,SAAS,GAAG;IAErB,YAAY,EAAE,GAAoB,EAAE;QAChC,OAAO,oBAAO,CAAC,MAAM,CAAC,QAAQ,EAAE,CAAC,KAAK,EAAE,CAAC,OAAO,EAAE,CAAC;IACvD,CAAC;CAEJ,CAAC"}
