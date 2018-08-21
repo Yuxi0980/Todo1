@@ -1,5 +1,4 @@
 import { Task, PerformsTasks, See, Text, Attribute } from 'serenity-js/lib/screenplay-protractor';
-import * as fs from 'fs';
 import { BooksPage } from '../../user_interface/BooksPage';
 import { CalculatePrice } from '../../interactions/books/CalculatePrice';
 import { equals } from '../../assertions';

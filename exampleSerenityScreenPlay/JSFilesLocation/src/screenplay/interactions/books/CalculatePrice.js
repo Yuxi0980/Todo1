@@ -8,26 +8,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const serenity_protractor_1 = require("../../../../node_modules/serenity-js/lib/serenity-protractor");
-const RegisterPage_1 = require("../../user_interface/RegisterPage");
-class Choose {
-    constructor(gender) {
-        this.gender = gender;
+const protractor_1 = require("../../../../node_modules/protractor");
+class CalculatePrice {
+    constructor() {
+        this.rows = protractor_1.element.all(protractor_1.by.css("#added > tbody > tr"));
     }
-    static gender(gender) {
-        return new Choose(gender);
-    }
-    performAs(actor) {
+    GrandTotal() {
         return __awaiter(this, void 0, void 0, function* () {
-            switch (this.gender) {
-                case 'male':
-                    return actor.attemptsTo(yield serenity_protractor_1.Click.on(RegisterPage_1.RegisterPage.maleRadioButton));
-                case 'female':
-                    return actor.attemptsTo(yield serenity_protractor_1.Click.on(RegisterPage_1.RegisterPage.femaleRadioButton));
-                default:
+            let totalSum = 0;
+            let numberOfRows = yield this.rows.count();
+            for (let row = 2; row <= numberOfRows; row++) {
+                let cellValue = yield protractor_1.element(protractor_1.by.css("#added > tbody > tr:nth-child(" + row + ") > td:nth-child(4)")).getText();
+                let newCellValue = cellValue.replace("Rs.", "");
+                totalSum = totalSum + parseInt(newCellValue);
             }
+            return totalSum.toString();
         });
     }
 }
-exports.Choose = Choose;
-//# sourceMappingURL=Choose.js.map
+exports.CalculatePrice = CalculatePrice;
+//# sourceMappingURL=CalculatePrice.js.map

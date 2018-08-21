@@ -8,26 +8,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const serenity_protractor_1 = require("../../../../node_modules/serenity-js/lib/serenity-protractor");
-const RegisterPage_1 = require("../../user_interface/RegisterPage");
-class Choose {
-    constructor(gender) {
-        this.gender = gender;
+const protractor_1 = require("../../../../node_modules/protractor");
+class FindBook {
+    constructor() {
+        this.rows = protractor_1.element.all(protractor_1.by.css("#listing > tbody > tr"));
     }
-    static gender(gender) {
-        return new Choose(gender);
-    }
-    performAs(actor) {
+    InTheTable(book) {
         return __awaiter(this, void 0, void 0, function* () {
-            switch (this.gender) {
-                case 'male':
-                    return actor.attemptsTo(yield serenity_protractor_1.Click.on(RegisterPage_1.RegisterPage.maleRadioButton));
-                case 'female':
-                    return actor.attemptsTo(yield serenity_protractor_1.Click.on(RegisterPage_1.RegisterPage.femaleRadioButton));
-                default:
+            let position;
+            let numberOfRows = yield this.rows.count();
+            for (let row = 2; row <= numberOfRows; row++) {
+                let cellValue = yield protractor_1.element(protractor_1.by.css("#listing > tbody > tr:nth-child(" + row + ") > td:nth-child(1)")).getText();
+                if (book == cellValue) {
+                    position = row;
+                    row = numberOfRows;
+                }
             }
+            return position;
         });
     }
 }
-exports.Choose = Choose;
-//# sourceMappingURL=Choose.js.map
+exports.FindBook = FindBook;
+//# sourceMappingURL=FindBook.js.map
