@@ -8,10 +8,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 const screenplay_protractor_1 = require("serenity-js/lib/screenplay-protractor");
-const AddBooks_1 = require("../../spec/screenplay/tasks/books/AddBooks");
-const SendFormLogin_1 = require("../../spec/screenplay/tasks/login/SendFormLogin");
+const AddBooks_1 = require("../../src/screenplay/tasks/books/AddBooks");
+const SendFormLogin_1 = require("../../src/screenplay/tasks/login/SendFormLogin");
 const fs = require("fs");
-const IsGrandTotalRight_1 = require("../../spec/screenplay/questions/books/IsGrandTotalRight");
+const IsGrandTotalRight_1 = require("../../src/screenplay/questions/books/IsGrandTotalRight");
 const links = JSON.parse(fs.readFileSync('./data/links.json', 'utf8'));
 module.exports = function Books() {
     return __awaiter(this, void 0, void 0, function* () {

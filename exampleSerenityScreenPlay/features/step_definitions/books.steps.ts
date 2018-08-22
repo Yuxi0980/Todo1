@@ -1,9 +1,9 @@
 import { Open } from 'serenity-js/lib/screenplay-protractor';
-import { AddBooks } from '../../spec/screenplay/tasks/books/AddBooks';
-import { SendFormLogin } from '../../spec/screenplay/tasks/login/SendFormLogin';
+import { AddBooks } from '../../src/screenplay/tasks/books/AddBooks';
+import { SendFormLogin } from '../../src/screenplay/tasks/login/SendFormLogin';
 
 import * as fs from 'fs';
-import { IsGrandTotalRight } from '../../spec/screenplay/questions/books/IsGrandTotalRight';
+import { IsGrandTotalRight } from '../../src/screenplay/questions/books/IsGrandTotalRight';
 
 const links = JSON.parse(fs.readFileSync('./data/links.json', 'utf8'));
 

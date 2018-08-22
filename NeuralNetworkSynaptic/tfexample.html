@@ -1,0 +1,70 @@
+<html>
+
+<head>
+    <title>Tensor Flow</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.6.1"></script>
+    <script>
+
+        import result from "./data/results.json";
+
+        const nr_epochs = 2048;  // higher=better but slower
+        var tfinterface;
+        const model = tf.sequential();
+
+        function initTF() {
+
+            // 1. TRAINING DATA - learn this 10x table
+            const trainingData = tf.tensor2d(result.map(item => [
+                item.rankPlayer1, item.rankPlayer2
+            ]));
+
+            const outputData = tf.tensor2d(result.map(item => [
+                item.PlayerWinner, item.PlayerWinner
+            ]));
+
+            // 2. ML MODEL - linear regression model
+            model.add(tf.layers.dense({ units: 1, inputShape: [1] }));
+            // Prep for training
+            model.compile({ loss: 'meanSquaredError', optimizer: 'sgd' });
+
+            // train -- the higher the number the more accurate you'll get (but longer run time)
+            tfinterface = model.fit(trainingData, outputData, { epochs: nr_epochs });
+        }
+
+        // 3. WRAPPER AROUND PREDICT
+        function predict(n1, n2) {
+
+            return tfinterface.then(() => { return model.predict(tf.tensor2d([n1, n2], [1, 1])); });
+
+        }
+
+        // Helper for form
+        function formpredict(v1, v2, r) {
+            predict(v1, v2).then(function (res) {
+                //   alert(res.get([0]));
+                r.innerHTML = res.get([0]);
+            });
+
+        }
+
+
+    </script>
+</head>
+
+<!-- HTML -->
+
+<body onLoad='initTF();'>
+    <p>
+        <div id='res'>Wait</div>
+        <p>
+            <form name='iForm' onSubmit='formpredict(this.val1.value, this.val2.value, document.getElementById("res")); return false;' )>
+                <script>
+                    document.getElementById("res").innerHTML = "&nbsp;";
+                </script> Input Number:
+                <input name='val1'>
+                <input name='val2'>
+                <input type=submit>
+            </form>
+</body>
+
+</html>
