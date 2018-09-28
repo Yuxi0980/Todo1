@@ -1,0 +1,68 @@
+{
+    "country": [
+        {
+            "name": "PANAMÁ",
+            "position": 1,
+            "idtype": [
+                {
+                    "name": "CIS",
+                    "position": 1
+                },
+                {
+                    "name": "PASAPORTE",
+                    "position": 2
+                },
+                {
+                    "name": "CEDULA",
+                    "position": 3
+                }
+            ]
+        },
+        {
+            "name": "COLOMBIA",
+            "position": 2,
+            "idtype": [
+                {
+                    "name": "CARNET DIPLOMÁTICO",
+                    "position": 1
+                },
+                {
+                    "name": "CEDULA EXTRANJERÍA",
+                    "position": 2
+                },
+                {
+                    "name": "DOCUMENTO EXTRANJERO",
+                    "position": 3
+                },
+                {
+                    "name": "FIDEICOMISOS",
+                    "position": 4
+                },
+                {
+                    "name": "INDEFINIDO",
+                    "position": 5
+                },
+                {
+                    "name": "NIT",
+                    "position": 6
+                },
+                {
+                    "name": "NUMERO UNICO IDE PERSONAL",
+                    "position": 7
+                },
+                {
+                    "name": "REGISTRO CIVIL",
+                    "position": 8
+                },
+                {
+                    "name": "SOCIEDAD EXTRANJERA SIN NIT",
+                    "position": 9
+                },
+                {
+                    "name": "TARJETA DE IDENTIDAD",
+                    "position": 10
+                }
+            ]
+        }
+    ]
+}
